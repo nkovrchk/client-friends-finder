@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.base.js --mode development",
     "start": "webpack serve --config webpack.dev.js",
+    "docker": "cross-env PROXY_URL=http://backend:8081 webpack serve --config webpack.dev.js",
     "lint": "eslint 'src/**' --ext .js,.jsx,.ts,.tsx"
   },
   "author": "nkovrchk",
@@ -44,6 +45,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^2.0.2",
     "core-js": "^3.20.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
@@ -58,6 +60,6 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.7.2"
   }
 }

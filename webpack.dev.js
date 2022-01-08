@@ -7,14 +7,14 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    historyApiFallback: true,
     static: {
       directory: path.join(__dirname, 'build'),
     },
+    historyApiFallback: true,
     compress: true,
     port: 8080,
     proxy: {
-      '/api': 'http://localhost:8081',
+      '/api': process.env.PROXY_URL || 'http://localhost:8081',
     }
   },
   plugins: [
