@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { GreetingApi } from 'net/greeting';
+import { LOGIN_URL } from './consts';
 
 export const MainPage: React.FC = () => {
-  useEffect(() => {
-    GreetingApi.get('my friend').then((data) => console.log(data));
-  }, []);
-
-  return <div>Hello world, my friend!</div>;
+  return (
+    <div>
+      <a href={LOGIN_URL}>Войти через VK</a>
+      <div>Авторизоваться</div>
+    </div>
+  );
 };

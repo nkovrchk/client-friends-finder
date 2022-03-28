@@ -14,7 +14,7 @@ module.exports = {
     compress: true,
     port: 8080,
     proxy: {
-      '/api': process.env.PROXY_URL || 'http://localhost:8081',
+      "/api/v1": process.env.PROXY_URI,
     }
   },
   plugins: [
