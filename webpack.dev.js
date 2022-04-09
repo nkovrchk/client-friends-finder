@@ -15,6 +15,7 @@ module.exports = {
     port: 8080,
     proxy: {
       "/api/v1": process.env.PROXY_URI,
+      '/auth': process.env.PROXY_URI,
     }
   },
   plugins: [

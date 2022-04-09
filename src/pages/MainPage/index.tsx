@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { LOGIN_URL } from './consts';
+import { Button } from 'ui/Button';
 
 export const MainPage: React.FC = () => {
+  const history = useHistory();
+
+  const toLoginPage = useCallback(() => {
+    history.push('/login');
+  }, [history]);
+
   return (
     <div>
-      <a href={LOGIN_URL}>Войти через VK</a>
-      <div>Авторизоваться</div>
+      <Button onClick={toLoginPage}>Авторизоваться</Button>
     </div>
   );
 };
