@@ -19,9 +19,6 @@ export const LoginPage: React.FC = () => {
         <Button onClick={redirect} $type="primary" $size="s">
           Войти
         </Button>
-        <Button onClick={redirect} $type="secondary" $size="m">
-          Выйти
-        </Button>
       </LoginFormStyled>
     </LoginPageStyled>
   );

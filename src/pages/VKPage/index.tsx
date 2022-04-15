@@ -1,16 +1,31 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
+import { Form } from 'components/Form';
+import { IFormData } from 'components/Form/types';
 import { VKApi } from 'net/api/vk';
+import { ITreeNode } from 'types';
+import { Spinner } from 'ui/Spinner';
+
+import { TreeComponent } from './components/Tree';
+import { VKPageStyled } from './styled';
 
 export const VKPage: React.FC = () => {
-  const getUser = useCallback(() => VKApi.getGraph(), []);
+  const [tree, setTree] = useState<ITreeNode | null>(null);
+  const [isPending, setIsPending] = useState(false);
+
+  const getUser = useCallback((formData: IFormData) => {
+    setIsPending(true);
+    VKApi.getGraph(formData)
+      .then((result) => {
+        setTree(result);
+      })
+      .finally(() => setIsPending(false));
+  }, []);
 
   return (
-    <div>
-      <div>Добро пожаловать в ВК!</div>
-      <button type="button" onClick={getUser}>
-        Получить данные
-      </button>
-    </div>
+    <VKPageStyled>
+      {isPending ? <Spinner /> : <Form onSubmit={getUser} />}
+      {tree ? <TreeComponent tree={tree} onNodeClick={() => {}} /> : null}
+    </VKPageStyled>
   );
 };
