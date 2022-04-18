@@ -1,8 +1,9 @@
 import { SpaceProps, TypographyProps } from 'styled-system';
 
-import { theme } from 'theme';
+import { IColors, theme } from 'theme';
 
 export interface IText extends SpaceProps, TypographyProps {
-  $color?: keyof typeof theme.colors;
+  $color?: keyof IColors;
   $variant?: keyof typeof theme.typography;
+  $center?: boolean;
 }

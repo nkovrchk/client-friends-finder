@@ -1,14 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { GraphPage } from 'pages/GraphPage';
 import { LoginPage } from 'pages/LoginPage';
 import { MainPage } from 'pages/MainPage';
-import { VKPage } from 'pages/VKPage';
 
-export const AppRoutes: React.FC = () => (
+import { ROUTES } from './consts';
+
+export const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" component={MainPage} exact />
-    <Route path="/vk" component={VKPage} exact />
-    <Route path="/login" component={LoginPage} exact />
+    <Route path={ROUTES.GRAPH.PATH} component={GraphPage} exact />
+    <Route path={ROUTES.LOGIN.PATH} component={LoginPage} exact />
+    <Route path={ROUTES.ROOT.PATH} component={MainPage} exact />
   </Switch>
 );
