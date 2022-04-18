@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { variant } from 'styled-system';
 
-import { buttonSizes, buttonTypes } from './const';
-import { ButtonProps } from './types';
+import { buttonPaddings, buttonSizes, buttonTypes } from './const';
+import { IButtonProps } from './types';
 
 const buttonType = variant({
   prop: '$type',
@@ -14,7 +14,12 @@ const buttonSize = variant({
   variants: buttonSizes,
 });
 
-export const Button = styled.button<ButtonProps>`
+const buttonPadding = variant({
+  prop: '$size',
+  variants: buttonPaddings,
+});
+
+export const Button = styled.button<IButtonProps>`
   border: 1px solid;
   padding: 0;
   text-decoration: none;
@@ -27,6 +32,14 @@ export const Button = styled.button<ButtonProps>`
   border-radius: ${({ theme }) => theme.space[2]}px;
   width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
 
-  ${buttonType}
-  ${buttonSize}
+  transition: ease-in-out background-color 0.15s, ease-in-out border-color 0.15s;
+
+  ${buttonType};
+  ${buttonSize};
+  ${buttonPadding}
 `;
+
+Button.defaultProps = {
+  $size: 's',
+  $type: 'primary',
+};

@@ -4,28 +4,35 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
-import { AppRoutes } from 'routes';
+import { Header } from 'components/Header';
+import { NotificationProvider } from 'context/provider/NotificationProvider';
+import { HttpInterceptor } from 'global';
+import { Routes } from 'routes';
+import { ROUTES } from 'routes/consts';
 import { AppContainer, PageContainer } from 'styled';
 import { theme } from 'theme';
 
 import 'normalize.css';
-import { AppHeader } from './pages/AppHeader';
-
-document.addEventListener('DOMContentLoaded', function () {
-  ReactDOM.render(<App />, document.getElementById('root'));
-});
 
 const App: React.FC = () => (
   <ThemeProvider theme={theme}>
     <AppContainer>
       <RecoilRoot>
-        <AppHeader />
-        <PageContainer>
-          <BrowserRouter basename="/">
-            <AppRoutes />
-          </BrowserRouter>
-        </PageContainer>
+        <BrowserRouter basename={ROUTES.ROOT.PATH}>
+          <NotificationProvider>
+            <HttpInterceptor>
+              <Header />
+              <PageContainer>
+                <Routes />
+              </PageContainer>
+            </HttpInterceptor>
+          </NotificationProvider>
+        </BrowserRouter>
       </RecoilRoot>
     </AppContainer>
   </ThemeProvider>
 );
+
+document.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.render(<App />, document.getElementById('root'));
+});
