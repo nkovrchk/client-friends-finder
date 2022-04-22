@@ -13,6 +13,7 @@ import { AppContainer, PageContainer } from 'styled';
 import { theme } from 'theme';
 
 import 'normalize.css';
+import { Footer } from './components/Footer';
 
 const App: React.FC = () => (
   <ThemeProvider theme={theme}>
@@ -21,9 +22,10 @@ const App: React.FC = () => (
         <BrowserRouter basename={ROUTES.ROOT.PATH}>
           <NotificationProvider>
             <HttpInterceptor>
-              <Header />
               <PageContainer>
+                <Header />
                 <Routes />
+                <Footer />
               </PageContainer>
             </HttpInterceptor>
           </NotificationProvider>

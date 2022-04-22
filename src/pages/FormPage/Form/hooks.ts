@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import { defaultFormData } from 'components/Form/consts';
-import { IFormData } from 'components/Form/types';
+import { defaultFormData } from 'pages/FormPage/Form/consts';
+import { IFormData } from 'pages/FormPage/Form/types';
 
 export const useForm = () => {
   const [formData, setFormData] = useState<IFormData>(defaultFormData);

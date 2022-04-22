@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const VKPageStyled = styled.div`
+export const GraphPageStyled = styled.div`
   display: flex;
-  flex-direction: column;
+  flex: 1;
 `;
