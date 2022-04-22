@@ -8,4 +8,7 @@ export const ROUTES = {
   GRAPH: {
     PATH: '/graph',
   },
+  FORM: {
+    PATH: '/form',
+  },
 };

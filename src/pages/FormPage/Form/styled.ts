@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { FieldStyled } from '../Field/styled';
+import { FieldStyled } from 'components/Field/styled';
 
 export const FormStyled = styled.div`
   display: flex;

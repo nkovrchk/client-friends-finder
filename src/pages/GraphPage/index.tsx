@@ -1,46 +1,17 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React from 'react';
 
-import { Form } from 'components/Form';
-import { IFormData } from 'components/Form/types';
-import { NotificationContext } from 'context';
-import { ENotificationType } from 'enums';
-import { AuthApi } from 'net/api/auth';
-import { VKApi } from 'net/api/vk';
-import { ITreeNode } from 'types';
-import { Spinner } from 'ui/Spinner';
+import { useAuth } from 'hooks';
+import { useGraphStore } from 'store/graph';
 
-import { TreeComponent } from './components/Tree';
-import { VKPageStyled } from './styled';
+import { Tree } from './components/Tree';
+import { GraphPageStyled } from './styled';
 
 export const GraphPage: React.FC = () => {
-  const [tree, setTree] = useState<ITreeNode | null>(null);
-  const [isPending, setIsPending] = useState(false);
+  const {
+    graph: { root },
+  } = useGraphStore();
 
-  const sendNotification = useContext(NotificationContext);
+  useAuth();
 
-  const getUser = useCallback((formData: IFormData) => {
-    setIsPending(true);
-    VKApi.getGraph(formData)
-      .then((result) => {
-        setTree(result);
-      })
-      .finally(() => setIsPending(false));
-  }, []);
-
-  useEffect(() => {
-    AuthApi.checkToken().then(({ isAuthed }) => {
-      if (!isAuthed) {
-        sendNotification(ENotificationType.ERROR, 'Вы не авторизованы.');
-      } else {
-        sendNotification(ENotificationType.SUCCESS, 'Вы авторизованы.');
-      }
-    });
-  }, [sendNotification]);
-
-  return (
-    <VKPageStyled>
-      {isPending ? <Spinner /> : <Form onSubmit={getUser} />}
-      {tree ? <TreeComponent tree={tree} onNodeClick={() => {}} /> : null}
-    </VKPageStyled>
-  );
+  return <GraphPageStyled>{root ? <Tree root={root} /> : null}</GraphPageStyled>;
 };

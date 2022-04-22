@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { Field } from 'components/Field';
+import { NumberInput } from 'components/Inputs/NumberInput';
 import { Button } from 'ui/Button';
 
-import { Field } from '../Field';
-import { NumberInput } from '../Inputs/NumberInput';
 import { useForm } from './hooks';
 import { FormStyled, FormFooterStyled, FormBodyStyled, FormInnerStyled } from './styled';
 import { IFormData } from './types';
