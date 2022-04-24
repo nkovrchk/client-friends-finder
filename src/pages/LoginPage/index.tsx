@@ -13,11 +13,11 @@ export const LoginPage: React.FC = () => {
   return (
     <LoginPageStyled>
       <LoginFormStyled>
-        <Text $variant="h3SemiBold" pb={6}>
+        <Text $center $variant="h3SemiBold" pb={6}>
           Авторизоваться
         </Text>
         <Button onClick={redirect} $type="primary" $size="s">
-          Войти
+          Войти через VK
         </Button>
       </LoginFormStyled>
     </LoginPageStyled>

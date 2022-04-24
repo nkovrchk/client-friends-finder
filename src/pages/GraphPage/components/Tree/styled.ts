@@ -13,4 +13,14 @@ export const TreeStyled = styled.div`
     background-color: ${({ theme }) => theme.colors.hover20};
     pointer-events: auto;
   }
+
+  & .not-linked-path {
+    stroke: ${({ theme }) => theme.colors.textTertiary};
+    stroke-width: 1px;
+  }
+
+  & .linked-path {
+    stroke: ${({ theme }) => theme.colors.textPrimary};
+    stroke-width: 2px;
+  }
 `;

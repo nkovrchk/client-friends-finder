@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 import Tree from 'react-d3-tree';
+import { TreeNodeEventCallback } from 'react-d3-tree/lib/Tree/types';
+import { PathClassFunction } from 'react-d3-tree/lib/types/common';
 
 import { useCenteredTree } from 'hooks';
 import { ITreeNode } from 'types';
@@ -8,13 +10,26 @@ import { TreeStyled, TreeWrapper } from './styled';
 
 interface ITreeProps {
   root: ITreeNode;
+  onNodeClick: (data: any) => void;
 }
 
-export const TreeComponent: React.FC<ITreeProps> = ({ root }) => {
+export const TreeComponent: React.FC<ITreeProps> = ({ root, onNodeClick }) => {
   const [translate, containerRef] = useCenteredTree();
 
+  const getLinkClass: PathClassFunction = useCallback(({ target }) => {
+    if (!target.data.attributes?.linked) return 'linked-path';
+
+    return 'not-linked-path';
+  }, []);
+
+  const handleNodeClick: TreeNodeEventCallback = useCallback(
+    ({ data }) => {
+      onNodeClick(data);
+    },
+    [onNodeClick],
+  );
+
   const renderNode = useCallback(({ nodeDatum, onNodeClick }) => {
-    const name = nodeDatum.name;
     const id = nodeDatum.attributes.id;
     const photo = nodeDatum.attributes.photo;
 
@@ -25,10 +40,7 @@ export const TreeComponent: React.FC<ITreeProps> = ({ root }) => {
             <image xlinkHref={photo} width="32" height="32" x="0%" y="0%" />
           </pattern>
         </defs>
-        <circle fill={`url(#${id})`} r="32" stroke="#939393" onClick={onNodeClick} />
-        <text fill="black" strokeWidth="1" x="40">
-          {name}
-        </text>
+        <circle fill={`url(#${id})`} r="32" stroke="#d3d3d3" onClick={onNodeClick} />
       </g>
     );
   }, []);
@@ -41,9 +53,10 @@ export const TreeComponent: React.FC<ITreeProps> = ({ root }) => {
           translate={translate}
           svgClassName="friends-finder-tree"
           orientation="vertical"
-          onNodeClick={() => alert('clicked')}
+          onNodeClick={handleNodeClick}
           collapsible={false}
           renderCustomNodeElement={renderNode}
+          pathClassFunc={getLinkClass}
         />
       </TreeStyled>
     </TreeWrapper>

@@ -1,9 +1,14 @@
 import { atom } from 'recoil';
 
 import { defaultGraphAtom } from './consts';
-import { IGraphAtom } from './types';
+import { IFriendAtom, IGraphAtom } from './types';
 
 export const graphAtom = atom<IGraphAtom>({
   key: 'graphAtom',
   default: defaultGraphAtom,
+});
+
+export const friendAtom = atom<IFriendAtom | null>({
+  key: 'friendAtom',
+  default: null,
 });
