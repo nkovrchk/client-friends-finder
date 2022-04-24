@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { useAuth } from 'hooks';
-import { useGraphStore } from 'store/graph';
-
+import { ProfileCard } from './components/ProfileCard';
 import { Tree } from './components/Tree';
+import { useGraphPage } from './hooks';
 import { GraphPageStyled } from './styled';
 
 export const GraphPage: React.FC = () => {
-  const {
-    graph: { root },
-  } = useGraphStore();
+  const { root, handleNodeClick, friend } = useGraphPage();
 
-  useAuth();
-
-  return <GraphPageStyled>{root ? <Tree root={root} /> : null}</GraphPageStyled>;
+  return (
+    <GraphPageStyled>
+      {friend ? <ProfileCard {...friend} /> : null}
+      {root ? <Tree root={root} onNodeClick={handleNodeClick} /> : null}
+    </GraphPageStyled>
+  );
 };

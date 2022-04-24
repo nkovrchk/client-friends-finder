@@ -9,4 +9,7 @@ export const AuthApi: IAuthApi = {
       .then(() => ({ isAuthed: true }))
       .catch(() => ({ isAuthed: false }));
   },
+  logout: () => {
+    return authHttp.post('/logout');
+  },
 };

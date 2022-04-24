@@ -7,8 +7,10 @@ import { Form } from 'pages/FormPage/Form';
 import { IFormData } from 'pages/FormPage/Form/types';
 import { ROUTES } from 'routes/consts';
 import { useGraphStore } from 'store/graph';
+import { Button } from 'ui/Button';
 import { Spinner } from 'ui/Spinner';
 
+import { AuthApi } from '../../net/api/auth';
 import { FormPageStyled } from './styled';
 
 export const FormPage: React.FC = () => {
@@ -27,7 +29,16 @@ export const FormPage: React.FC = () => {
     [history, setGraph],
   );
 
+  const logout = useCallback(() => {
+    AuthApi.logout();
+  }, []);
+
   useAuth();
 
-  return <FormPageStyled>{isPending ? <Spinner /> : <Form onSubmit={getUser} />}</FormPageStyled>;
+  return (
+    <FormPageStyled>
+      <Button onClick={logout}>выйти</Button>
+      {isPending ? <Spinner /> : <Form onSubmit={getUser} />}
+    </FormPageStyled>
+  );
 };
