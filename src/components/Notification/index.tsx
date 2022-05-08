@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { ENotificationType } from 'enums';
-import { Success24M, Warning24M, Error24M } from 'icons';
+import { Success24M, Warning24M, Error24M } from 'static/icons';
 import { Icon } from 'ui/Icon';
 import { Text } from 'ui/Text';
 

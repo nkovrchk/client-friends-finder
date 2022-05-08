@@ -15,12 +15,12 @@ export const TreeStyled = styled.div`
   }
 
   & .not-linked-path {
-    stroke: ${({ theme }) => theme.colors.textTertiary};
+    stroke: ${({ theme }) => theme.colors.cardStroke};
     stroke-width: 1px;
   }
 
   & .linked-path {
-    stroke: ${({ theme }) => theme.colors.textPrimary};
+    stroke: ${({ theme }) => theme.colors.systemError};
     stroke-width: 2px;
   }
 `;

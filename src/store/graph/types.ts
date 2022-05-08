@@ -9,4 +9,8 @@ export interface IFriendAtom {
   id: number;
   name: string;
   imageUrl: string;
+  matched: boolean;
+  wall: string[];
+  info: string[];
+  groups: string[];
 }

@@ -15,9 +15,9 @@ export const useGraphPage = () => {
     (data: ITreeNode) => {
       const id = Number(data.attributes.id);
       const name = data.name;
-      const imageUrl = data.attributes.photo;
+      const { matched, info, wall, groups, photo } = data.attributes;
 
-      setFriend({ name, imageUrl, id });
+      setFriend({ name, imageUrl: photo, id, matched, info, wall, groups });
     },
     [setFriend],
   );

@@ -15,6 +15,12 @@ export const buttonTypes = {
       borderColor: 'buttonPrimaryPressed',
       color: 'simpleWhite',
     },
+    '&:disabled': {
+      backgroundColor: 'buttonDisabled',
+      borderColor: 'buttonDisabled',
+      color: 'simpleWhite',
+      cursor: 'default',
+    },
   },
   secondary: {
     backgroundColor: 'transparent',
@@ -29,6 +35,12 @@ export const buttonTypes = {
       backgroundColor: 'buttonSecondaryPressed',
       borderColor: 'buttonPrimary',
       color: 'buttonPrimary',
+    },
+    '&:disabled': {
+      backgroundColor: 'buttonDisabled',
+      borderColor: 'buttonDisabled',
+      color: 'simpleWhite',
+      cursor: 'default',
     },
   },
 };

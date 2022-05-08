@@ -5,4 +5,5 @@ export interface IVKApi {
 export interface IFormDataDto {
   depth: number;
   width: number;
+  keyWords: string[];
 }
