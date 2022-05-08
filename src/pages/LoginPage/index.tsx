@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
 
-import { Button } from 'ui/Button';
 import { Text } from 'ui/Text';
 
-import { LoginPageStyled, LoginFormStyled } from './styled';
+import { LoginPageStyled, LoginFormStyled, VKButton } from './styled';
 
 export const LoginPage: React.FC = () => {
   const redirect = useCallback(() => {
@@ -14,11 +13,9 @@ export const LoginPage: React.FC = () => {
     <LoginPageStyled>
       <LoginFormStyled>
         <Text $center $variant="h3SemiBold" pb={6}>
-          Авторизоваться
+          Авторизация
         </Text>
-        <Button onClick={redirect} $type="primary" $size="s">
-          Войти через VK
-        </Button>
+        <VKButton onClick={redirect}>Войти через VK</VKButton>
       </LoginFormStyled>
     </LoginPageStyled>
   );

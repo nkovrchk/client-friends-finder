@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom';
 
 import { AuthApi } from 'net/api/auth';
 import { ROUTES } from 'routes/consts';
+import { useGraphStore } from 'store/graph';
 import { Button } from 'ui/Button';
 import { Text } from 'ui/Text';
 
-import { useGraphStore } from '../../store/graph';
 import { About } from './components/About';
 import { HowTo } from './components/HowTo';
 import { MainPageFooter, MainPageInner, MainPageStyled } from './styled';
