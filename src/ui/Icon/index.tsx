@@ -10,7 +10,7 @@ const namedSize = {
   l: 32,
 };
 
-const size = ({ size = 's' }: IIconProps) => `${namedSize[size]}px`;
+const size = ({ size = 'm' }: IIconProps) => `${namedSize[size]}px`;
 
 const margin = ({ mr, mb, mt, ml, theme }: IIconProps & { theme: ITheme }) => css`
   ${ml ? `margin-left: ${theme.space[ml]}px;` : ''}

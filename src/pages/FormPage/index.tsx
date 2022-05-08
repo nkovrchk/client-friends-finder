@@ -7,10 +7,8 @@ import { Form } from 'pages/FormPage/Form';
 import { IFormData } from 'pages/FormPage/Form/types';
 import { ROUTES } from 'routes/consts';
 import { useGraphStore } from 'store/graph';
-import { Button } from 'ui/Button';
 import { Spinner } from 'ui/Spinner';
 
-import { AuthApi } from '../../net/api/auth';
 import { FormPageStyled } from './styled';
 
 export const FormPage: React.FC = () => {
@@ -19,9 +17,9 @@ export const FormPage: React.FC = () => {
   const { setGraph } = useGraphStore();
 
   const getUser = useCallback(
-    (formData: IFormData) => {
+    ({ depth, width, keyWords }: IFormData) => {
       setIsPending(true);
-      VKApi.getGraph(formData).then((result) => {
+      VKApi.getGraph({ depth, width, keyWords }).then((result) => {
         setGraph({ root: result });
         history.push(ROUTES.GRAPH.PATH);
       });
@@ -29,16 +27,13 @@ export const FormPage: React.FC = () => {
     [history, setGraph],
   );
 
-  const logout = useCallback(() => {
-    AuthApi.logout();
-  }, []);
-
   useAuth();
+
+  if (isPending) return <Spinner />;
 
   return (
     <FormPageStyled>
-      <Button onClick={logout}>выйти</Button>
-      {isPending ? <Spinner /> : <Form onSubmit={getUser} />}
+      <Form onSubmit={getUser} />
     </FormPageStyled>
   );
 };

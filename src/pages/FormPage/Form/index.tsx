@@ -1,43 +1,113 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { DropResult } from 'react-beautiful-dnd';
 
+import { DragAndDrop, Draggable } from 'components/DragAndDrop';
 import { Field } from 'components/Field';
+import { DefaultInput } from 'components/Inputs';
 import { NumberInput } from 'components/Inputs/NumberInput';
+import { Add24M, Close24M } from 'static/icons';
 import { Button } from 'ui/Button';
+import { Text } from 'ui/Text';
 
 import { useForm } from './hooks';
-import { FormStyled, FormFooterStyled, FormBodyStyled, FormInnerStyled } from './styled';
+import {
+  FormStyled,
+  FormFooterStyled,
+  FormFieldsStyled,
+  FormInnerStyled,
+  WordContainer,
+  WordFieldStyled,
+  DeleteWordIcon,
+  AddWordIcon,
+} from './styled';
 import { IFormData } from './types';
+import { reorder } from './utils';
 
 interface IFormProps {
   onSubmit: (formData: IFormData) => void;
 }
 
 export const Form: React.FC<IFormProps> = ({ onSubmit }) => {
-  const { formData, setFormData } = useForm();
+  const {
+    formData: { word, keyWords, width, depth },
+    setFormData,
+    changeWord,
+    addWord,
+    submitForm,
+    deleteWord,
+    canSubmit,
+    canAddWord,
+  } = useForm(onSubmit);
+
+  const onDragEnd = useCallback(
+    (result: DropResult) => {
+      if (!result.destination || result.destination.index === result.source.index) {
+        return;
+      }
+
+      const updatedList = reorder(keyWords, result.source.index, result.destination.index);
+
+      setFormData({ keyWords: updatedList });
+    },
+    [keyWords, setFormData],
+  );
 
   return (
     <FormStyled>
       <FormInnerStyled>
-        <FormBodyStyled>
+        <FormFieldsStyled>
+          <Text pb={4} pt={8} $variant="h5SemiBold">
+            Укажите параметры графа
+          </Text>
           <Field id="width" label="ширина графа">
-            <NumberInput
-              id="width"
-              value={formData.width}
-              max={5}
-              onChange={(value) => setFormData({ width: value })}
-            />
+            <NumberInput id="width" value={width} max={5} onChange={(value) => setFormData({ width: value })} />
           </Field>
           <Field id="depth" label="глубина графа">
-            <NumberInput
-              id="depth"
-              max={5}
-              value={formData.depth}
-              onChange={(value) => setFormData({ depth: value })}
-            />
+            <NumberInput id="depth" max={5} value={depth} onChange={(value) => setFormData({ depth: value })} />
           </Field>
-        </FormBodyStyled>
+        </FormFieldsStyled>
+        <FormFieldsStyled>
+          <Text pb={4} pt={8} $variant="h5SemiBold">
+            Добавьте ключевые слова
+          </Text>
+          <Field id="key-word" label="новое слово">
+            <WordFieldStyled>
+              <DefaultInput id="key-word" onChange={changeWord} value={word} />
+              <AddWordIcon onClick={addWord} disabled={!canAddWord}>
+                <Add24M />
+              </AddWordIcon>
+            </WordFieldStyled>
+          </Field>
+        </FormFieldsStyled>
+        {keyWords.length > 0 ? (
+          <FormFieldsStyled>
+            <Text pb={4} pt={8} $variant="h5SemiBold">
+              Отсортируйте по приоритету
+            </Text>
+            <DragAndDrop id="key-words-drag-n-drop" onDragEnd={onDragEnd}>
+              {keyWords.map((word, i) => (
+                <Draggable id={`key-${i}`} key={i}>
+                  <WordContainer>
+                    <Text $variant="body1Regular">{word}</Text>
+                    <DeleteWordIcon
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        deleteWord(i);
+                      }}
+                    >
+                      <Close24M />
+                    </DeleteWordIcon>
+                  </WordContainer>
+                </Draggable>
+              ))}
+            </DragAndDrop>
+          </FormFieldsStyled>
+        ) : null}
+
         <FormFooterStyled>
-          <Button onClick={() => onSubmit(formData)}>Построить граф</Button>
+          <Button $size="m" onClick={submitForm} disabled={!canSubmit}>
+            Построить граф
+          </Button>
         </FormFooterStyled>
       </FormInnerStyled>
     </FormStyled>

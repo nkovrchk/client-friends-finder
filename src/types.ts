@@ -4,6 +4,10 @@ export interface ITreeNode extends Omit<RawNodeDatum, 'attributes'> {
   attributes: {
     id: string;
     photo: string;
-    isMatch: boolean;
+    matched: boolean;
+    linked: boolean;
+    info: string[];
+    wall: string[];
+    groups: string[];
   };
 }

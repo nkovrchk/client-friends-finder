@@ -1,10 +1,15 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
+import { useSession } from 'store/session';
 import { Link } from 'ui/Link';
 
 import { HeaderItems, HeaderStyled, HeaderItem, LogoLink } from './styled';
 
 export const Header: React.FC = () => {
+  const { pathname } = useLocation();
+  const { logout } = useSession();
+
   return (
     <HeaderStyled>
       <LogoLink to="/">FriendsFinder</LogoLink>
@@ -31,6 +36,13 @@ export const Header: React.FC = () => {
             О приложении
           </Link>
         </HeaderItem>
+        {pathname === '/form' ? (
+          <HeaderItem>
+            <Link to="#" onClick={logout}>
+              Выйти
+            </Link>
+          </HeaderItem>
+        ) : null}
       </HeaderItems>
     </HeaderStyled>
   );
