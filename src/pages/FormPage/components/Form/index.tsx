@@ -5,7 +5,7 @@ import { DragAndDrop, Draggable } from 'components/DragAndDrop';
 import { Field } from 'components/Field';
 import { DefaultInput } from 'components/Inputs';
 import { NumberInput } from 'components/Inputs/NumberInput';
-import { Add24M, Close24M } from 'static/icons';
+import { Add24M, Close24M } from 'icons';
 import { Button } from 'ui/Button';
 import { Text } from 'ui/Text';
 
@@ -14,11 +14,11 @@ import {
   FormStyled,
   FormFooterStyled,
   FormFieldsStyled,
-  FormInnerStyled,
   WordContainer,
   WordFieldStyled,
   DeleteWordIcon,
   AddWordIcon,
+  FormBodyStyled,
 } from './styled';
 import { IFormData } from './types';
 import { reorder } from './utils';
@@ -54,7 +54,7 @@ export const Form: React.FC<IFormProps> = ({ onSubmit }) => {
 
   return (
     <FormStyled>
-      <FormInnerStyled>
+      <FormBodyStyled>
         <FormFieldsStyled>
           <Text pb={4} pt={8} $variant="h5SemiBold">
             Укажите параметры графа
@@ -79,11 +79,11 @@ export const Form: React.FC<IFormProps> = ({ onSubmit }) => {
             </WordFieldStyled>
           </Field>
         </FormFieldsStyled>
-        {keyWords.length > 0 ? (
-          <FormFieldsStyled>
-            <Text pb={4} pt={8} $variant="h5SemiBold">
-              Отсортируйте по приоритету
-            </Text>
+        <FormFieldsStyled>
+          <Text pb={4} pt={8} $variant="h5SemiBold">
+            Отсортируйте по приоритету
+          </Text>
+          {keyWords.length > 0 ? (
             <DragAndDrop id="key-words-drag-n-drop" onDragEnd={onDragEnd}>
               {keyWords.map((word, i) => (
                 <Draggable id={`key-${i}`} key={i}>
@@ -101,15 +101,20 @@ export const Form: React.FC<IFormProps> = ({ onSubmit }) => {
                 </Draggable>
               ))}
             </DragAndDrop>
-          </FormFieldsStyled>
-        ) : null}
-
-        <FormFooterStyled>
-          <Button $size="m" onClick={submitForm} disabled={!canSubmit}>
-            Построить граф
-          </Button>
-        </FormFooterStyled>
-      </FormInnerStyled>
+          ) : (
+            <i>
+              <Text $color="textSecondary" $variant="body1Regular">
+                Список ключевых слов пуст.
+              </Text>
+            </i>
+          )}
+        </FormFieldsStyled>
+      </FormBodyStyled>
+      <FormFooterStyled>
+        <Button $size="m" onClick={submitForm} disabled={!canSubmit}>
+          Построить граф
+        </Button>
+      </FormFooterStyled>
     </FormStyled>
   );
 };

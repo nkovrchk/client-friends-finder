@@ -31,30 +31,29 @@ export const ModalContainer = styled.div`
   }
 `;
 
+export const RootContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
 export const PageContainer = styled(ModalContainer)`
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding-top: 68px;
+  margin: 0 ${({ theme }) => theme.space[20]}px;
 `;
 
-export const AppContainer = styled(ModalContainer)`
-  position: relative;
-  min-height: 100vh;
+export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  padding-top: 68px;
 `;
 
 export const FullWidthContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 -80px;
-`;
-
-export const RouteContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin: 0 ${({ theme }) => theme.space[20]}px;
 `;

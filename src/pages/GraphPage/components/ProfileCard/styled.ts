@@ -16,7 +16,7 @@ export const ProfileCardStyled = styled.div`
   border-radius: ${({ theme }) => theme.space[2]}px;
   border: 1px solid ${({ theme }) => theme.colors.cardStroke};
   background-color: ${({ theme }) => theme.colors.bgPrimary};
-  top: 8px;
+  top: 16px;
   left: 8px;
 `;
 

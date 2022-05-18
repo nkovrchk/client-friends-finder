@@ -13,7 +13,7 @@
     "jsx": "react",
     "declaration": true,
     "baseUrl": "./src",
-    "sourceMap": true
+    "sourceMap": true,
   },
   "exclude": ["node_modules"],
   "include": ["src"]

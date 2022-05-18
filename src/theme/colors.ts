@@ -93,7 +93,6 @@ export const colors = {
   textConstantWhite: '#FFFFFF',
   textDisabled: '#BBBBBB',
   textPrimary: '#000000',
-  textPrimaryInverse: '#FFFFFF',
   textSecondary: '#939393',
   textTagsActive: '#000000',
   textTertiary: '#BBBBBB',

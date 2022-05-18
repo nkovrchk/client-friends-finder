@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import { Notification } from 'components/Notification';
-import { NotificationContext } from 'context';
 import { ENotificationType } from 'enums';
+
+export const NotificationContext = React.createContext((type: ENotificationType, message: string) => {});
 
 export const NotificationProvider: React.FC = ({ children }) => {
   const [type, setType] = useState<ENotificationType | null>(null);
@@ -24,4 +25,8 @@ export const NotificationProvider: React.FC = ({ children }) => {
       {children}
     </NotificationContext.Provider>
   );
+};
+
+export const useNotification = () => {
+  return useContext(NotificationContext);
 };

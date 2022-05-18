@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { defaultFormData } from 'pages/FormPage/Form/consts';
-import { IFormData } from 'pages/FormPage/Form/types';
+import { defaultFormData } from './consts';
+import { IFormData } from './types';
 
 export const useForm = (onSubmit: (data: IFormData) => void) => {
   const [formData, setFormData] = useState<IFormData>(defaultFormData);

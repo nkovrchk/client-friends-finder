@@ -1,6 +1,5 @@
 const path = require('path');
 const baseConfig = require('./webpack.base');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   ...baseConfig,
@@ -18,10 +17,5 @@ module.exports = {
       '/auth': process.env.PROXY_URI,
     }
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'src/templates/index.html',
-    })
-  ],
 
 };
