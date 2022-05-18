@@ -20,7 +20,7 @@ export const TreeStyled = styled.div`
   }
 
   & .linked-path {
-    stroke: ${({ theme }) => theme.colors.systemError};
+    stroke: ${({ theme }) => theme.colors.systemSuccess};
     stroke-width: 2px;
   }
 `;

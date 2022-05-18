@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { useAuth } from 'hooks';
+import { ROUTES } from 'routes/consts';
 import { useGraphStore } from 'store/graph';
 import { ITreeNode } from 'types';
 
@@ -10,6 +11,8 @@ export const useGraphPage = () => {
     setFriend,
     friend,
   } = useGraphStore();
+
+  const history = useHistory();
 
   const handleNodeClick = useCallback(
     (data: ITreeNode) => {
@@ -22,11 +25,20 @@ export const useGraphPage = () => {
     [setFriend],
   );
 
-  useAuth();
+  const toFormPage = useCallback(() => {
+    history.push(ROUTES.FORM.PATH);
+  }, [history]);
+
+  useEffect(
+    () => () => setFriend(null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
 
   return {
     root,
     handleNodeClick,
     friend,
+    toFormPage,
   };
 };

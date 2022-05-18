@@ -3,9 +3,9 @@ import Tree from 'react-d3-tree';
 import { TreeNodeEventCallback } from 'react-d3-tree/lib/Tree/types';
 import { PathClassFunction, RawNodeDatum } from 'react-d3-tree/lib/types/common';
 
-import { useCenteredTree } from 'hooks';
 import { ITreeNode } from 'types';
 
+import { useCenteredTree } from './hooks';
 import { TreeStyled, TreeWrapper } from './styled';
 
 interface ITreeProps {
@@ -38,23 +38,23 @@ export const TreeComponent: React.FC<ITreeProps> = ({ root, onNodeClick }) => {
       <g>
         <defs>
           <linearGradient id="linear-gradient">
-            <stop offset="0%" stopColor="#ff3b30" />
-            <stop offset="100%" stopColor="#dc3545" />
+            <stop offset="0%" stopColor="#28a745" />
+            <stop offset="100%" stopColor="#20c997" />
           </linearGradient>
-          <pattern id={id} x="0%" y="0%" height="100%" width="100%" viewBox="0 0 36 36">
-            <image xlinkHref={photo} width="36" height="36" x="0%" y="0%" />
+          <pattern id={id} x="0%" y="0%" height="100%" width="100%" viewBox="0 0 48 48">
+            <image xlinkHref={photo} width="48" height="48" x="0%" y="0%" />
           </pattern>
         </defs>
-        <circle fill={`url(#${id})`} r="36" stroke="url(#linear-gradient)" strokeWidth={3} onClick={onNodeClick} />
+        <circle fill={`url(#${id})`} r="48" stroke="url(#linear-gradient)" strokeWidth={4} onClick={onNodeClick} />
       </g>
     ) : (
       <g>
         <defs>
-          <pattern id={id} x="0%" y="0%" height="100%" width="100%" viewBox="0 0 24 24">
-            <image xlinkHref={photo} width="24" height="24" x="0%" y="0%" />
+          <pattern id={id} x="0%" y="0%" height="100%" width="100%" viewBox="0 0 32 32">
+            <image xlinkHref={photo} width="32" height="32" x="0%" y="0%" />
           </pattern>
         </defs>
-        <circle fill={`url(#${id})`} r="24" stroke="#d9d9d9" strokeWidth={2} onClick={onNodeClick} />
+        <circle fill={`url(#${id})`} r="32" stroke="#d9d9d9" strokeWidth={2} onClick={onNodeClick} />
       </g>
     );
   }, []);

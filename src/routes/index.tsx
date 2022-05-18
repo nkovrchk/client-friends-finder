@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { FormPage } from 'pages/FormPage';
-import { GraphPage } from 'pages/GraphPage';
-import { LoginPage } from 'pages/LoginPage';
-import { MainPage } from 'pages/MainPage';
-import { RouteContainer } from 'styled';
+import { PageContainer } from 'styled';
+import { Spinner } from 'ui/Spinner';
 
+import { AuthenticatedRoute } from './AuthenticatedRoute';
 import { ROUTES } from './consts';
 
+const MainPage = lazy(() => import('pages/MainPage'));
+const FormPage = lazy(() => import('pages/FormPage'));
+const LoginPage = lazy(() => import('pages/LoginPage'));
+const GraphPage = lazy(() => import('pages/GraphPage'));
+
 export const Routes: React.FC = () => (
-  <RouteContainer>
-    <Switch>
-      <Route path={ROUTES.FORM.PATH} component={FormPage} />
-      <Route path={ROUTES.GRAPH.PATH} component={GraphPage} />
-      <Route path={ROUTES.LOGIN.PATH} component={LoginPage} />
-      <Route path={ROUTES.ROOT.PATH} component={MainPage} />
-    </Switch>
-  </RouteContainer>
+  <PageContainer>
+    <Suspense fallback={<Spinner />}>
+      <Switch>
+        <AuthenticatedRoute path={ROUTES.FORM.PATH} component={FormPage} />
+        <AuthenticatedRoute path={ROUTES.GRAPH.PATH} component={GraphPage} />
+        <Route path={ROUTES.LOGIN.PATH} component={LoginPage} />
+        <Route path={ROUTES.ROOT.PATH} component={MainPage} />
+      </Switch>
+    </Suspense>
+  </PageContainer>
 );

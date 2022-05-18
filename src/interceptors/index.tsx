@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { NotificationContext } from 'context';
+import { useNotification } from 'context';
 import { ENotificationType } from 'enums';
 import { http } from 'net/http';
 import { ROUTES } from 'routes/consts';
 
 export const HttpInterceptor: React.FC = ({ children }) => {
-  const sendNotification = useContext(NotificationContext);
+  const sendNotification = useNotification();
   const history = useHistory();
 
   useEffect(() => {

@@ -5,33 +5,33 @@ import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
 
 import { Header } from 'components/Header';
-import { NotificationProvider } from 'context/provider/NotificationProvider';
-import { HttpInterceptor } from 'global';
+import { AuthProvider, NotificationProvider } from 'context';
+import { HttpInterceptor } from 'interceptors';
 import { Routes } from 'routes';
 import { ROUTES } from 'routes/consts';
-import { AppContainer, PageContainer } from 'styled';
+import { AppContainer, RootContainer } from 'styled';
 import { theme } from 'theme';
 
 import 'normalize.css';
-import { Footer } from './components/Footer';
 
 const App: React.FC = () => (
   <ThemeProvider theme={theme}>
-    <AppContainer>
-      <RecoilRoot>
-        <BrowserRouter basename={ROUTES.ROOT.PATH}>
-          <NotificationProvider>
-            <HttpInterceptor>
-              <PageContainer>
-                <Header />
-                <Routes />
-                <Footer />
-              </PageContainer>
-            </HttpInterceptor>
-          </NotificationProvider>
-        </BrowserRouter>
-      </RecoilRoot>
-    </AppContainer>
+    <RootContainer>
+      <AppContainer>
+        <RecoilRoot>
+          <BrowserRouter basename={ROUTES.ROOT.PATH}>
+            <NotificationProvider>
+              <HttpInterceptor>
+                <AuthProvider>
+                  <Header />
+                  <Routes />
+                </AuthProvider>
+              </HttpInterceptor>
+            </NotificationProvider>
+          </BrowserRouter>
+        </RecoilRoot>
+      </AppContainer>
+    </RootContainer>
   </ThemeProvider>
 );
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Burger24M } from 'static/icons';
+import { Burger24M } from 'icons';
 import { Icon } from 'ui/Icon';
 
 import { DraggableStyled, DraggableContent } from './styled';

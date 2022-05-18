@@ -8,30 +8,105 @@ export const SpinnerContainer = styled.div`
 `;
 
 export const SpinnerStyled = styled.div`
-  &,
-  &:after {
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
+  margin: 100px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+
+  & .circle {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 
-  margin: 0 auto;
-  font-size: 10px;
-  position: relative;
-  text-indent: -9999em;
-  border-top: 8px solid #ccc;
-  border-right: 8px solid #ccc;
-  border-bottom: 8px solid #ccc;
-  border-left: 8px solid #939393;
-  transform: translateZ(0);
-  animation: load 1.1s infinite linear;
+  & .circle:before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 15%;
+    height: 15%;
+    background-color: #939393;
+    border-radius: 100%;
+    -webkit-animation: circle-spin 1.2s infinite ease-in-out both;
+    animation: circle-spin 1.2s infinite ease-in-out both;
+  }
+  & .circle2 {
+    transform: rotate(30deg);
+  }
+  & .circle3 {
+    transform: rotate(60deg);
+  }
+  & .circle4 {
+    transform: rotate(90deg);
+  }
+  & .circle5 {
+    transform: rotate(120deg);
+  }
+  & .circle6 {
+    transform: rotate(150deg);
+  }
+  & .circle7 {
+    transform: rotate(180deg);
+  }
+  & .circle8 {
+    transform: rotate(210deg);
+  }
+  & .circle9 {
+    transform: rotate(240deg);
+  }
+  & .circle10 {
+    transform: rotate(270deg);
+  }
+  & .circle11 {
+    transform: rotate(300deg);
+  }
+  & .circle12 {
+    transform: rotate(330deg);
+  }
+  & .circle2:before {
+    animation-delay: -1.1s;
+  }
+  & .circle3:before {
+    animation-delay: -1s;
+  }
+  & .circle4:before {
+    animation-delay: -0.9s;
+  }
+  & .circle5:before {
+    animation-delay: -0.8s;
+  }
+  & .circle6:before {
+    animation-delay: -0.7s;
+  }
+  & .circle7:before {
+    animation-delay: -0.6s;
+  }
+  & .circle8:before {
+    animation-delay: -0.5s;
+  }
+  & .circle9:before {
+    animation-delay: -0.4s;
+  }
+  & .circle10:before {
+    animation-delay: -0.3s;
+  }
+  & .circle11:before {
+    animation-delay: -0.2s;
+  }
+  & .circle12:before {
+    animation-delay: -0.1s;
+  }
 
-  @keyframes load {
-    0% {
-      transform: rotate(0deg);
-    }
+  @keyframes circle-spin {
+    0%,
+    39%,
     100% {
-      transform: rotate(360deg);
+      opacity: 0;
+    }
+    40% {
+      opacity: 1;
     }
   }
 `;

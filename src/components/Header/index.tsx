@@ -1,14 +1,12 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 
-import { useSession } from 'store/session';
+import { useAuth } from 'context';
 import { Link } from 'ui/Link';
 
 import { HeaderItems, HeaderStyled, HeaderItem, LogoLink } from './styled';
 
 export const Header: React.FC = () => {
-  const { pathname } = useLocation();
-  const { logout } = useSession();
+  const { isAuthed, logout } = useAuth();
 
   return (
     <HeaderStyled>
@@ -36,7 +34,7 @@ export const Header: React.FC = () => {
             О приложении
           </Link>
         </HeaderItem>
-        {pathname === '/form' ? (
+        {isAuthed ? (
           <HeaderItem>
             <Link to="#" onClick={logout}>
               Выйти
