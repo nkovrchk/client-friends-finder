@@ -60,7 +60,7 @@ export const useForm = (onSubmit: (data: IFormData) => void) => {
 
   useEffect(() => {
     const length = formData.word.length;
-    setCanAddWord(length > 0 && length <= 15);
+    setCanAddWord(length > 0 && length <= 30);
   }, [formData.word.length]);
 
   return {

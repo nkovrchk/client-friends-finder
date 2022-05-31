@@ -39,6 +39,11 @@ export const Form: React.FC<IFormProps> = ({ onSubmit }) => {
     canAddWord,
   } = useForm(onSubmit);
 
+  const minD = 1;
+  const minW = 2;
+  const maxD = 4;
+  const maxW = 5;
+
   const onDragEnd = useCallback(
     (result: DropResult) => {
       if (!result.destination || result.destination.index === result.source.index) {
@@ -60,10 +65,28 @@ export const Form: React.FC<IFormProps> = ({ onSubmit }) => {
             Укажите параметры графа
           </Text>
           <Field id="width" label="ширина графа">
-            <NumberInput id="width" value={width} max={5} onChange={(value) => setFormData({ width: value })} />
+            <NumberInput
+              id="width"
+              value={width}
+              onChange={(value) => setFormData({ width: value })}
+              onBlur={(value) => {
+                if (value > maxW) setFormData({ width: maxW });
+                else if (value < minW) setFormData({ width: minW });
+                else setFormData({ width: value });
+              }}
+            />
           </Field>
           <Field id="depth" label="глубина графа">
-            <NumberInput id="depth" max={5} value={depth} onChange={(value) => setFormData({ depth: value })} />
+            <NumberInput
+              id="depth"
+              value={depth}
+              onChange={(value) => setFormData({ depth: value })}
+              onBlur={(value) => {
+                if (value > maxD) setFormData({ depth: maxD });
+                else if (value < minD) setFormData({ depth: minD });
+                else setFormData({ depth: value });
+              }}
+            />
           </Field>
         </FormFieldsStyled>
         <FormFieldsStyled>

@@ -16,10 +16,10 @@ export const Routes: React.FC = () => (
   <PageContainer>
     <Suspense fallback={<Spinner />}>
       <Switch>
-        <AuthenticatedRoute path={ROUTES.FORM.PATH} component={FormPage} />
-        <AuthenticatedRoute path={ROUTES.GRAPH.PATH} component={GraphPage} />
-        <Route path={ROUTES.LOGIN.PATH} component={LoginPage} />
-        <Route path={ROUTES.ROOT.PATH} component={MainPage} />
+        <AuthenticatedRoute exact path={ROUTES.FORM.PATH} component={FormPage} />
+        <AuthenticatedRoute exact path={ROUTES.GRAPH.PATH} component={GraphPage} />
+        <Route exact path={ROUTES.LOGIN.PATH} component={LoginPage} />
+        <Route exact path={ROUTES.ROOT.PATH} component={MainPage} />
       </Switch>
     </Suspense>
   </PageContainer>

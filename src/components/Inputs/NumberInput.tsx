@@ -6,28 +6,29 @@ interface INumberInputProps {
   id: string;
   value: number;
   onChange: (value: number) => void;
-  max?: number;
+  onBlur: (value: number) => void;
 }
 
-export const NumberInput: React.FC<INumberInputProps> = ({ id, value, onChange, max }) => {
+export const NumberInput: React.FC<INumberInputProps> = ({ id, value, onChange, onBlur }) => {
   const handleChange = useCallback(
     (e) => {
       const newValue = e.target.value;
 
-      const isNumber = /^\d+$/.test(newValue);
-
-      if (isNumber) {
-        const numVal = Number(newValue);
-        const result = max ? (numVal > max ? max : numVal) : numVal;
-
-        onChange(result);
-        return;
-      }
-
-      onChange(isNumber ? Number(newValue) : value);
+      onChange(Number(newValue.replace(/\D/g, '')));
     },
-    [max, onChange, value],
+    [onChange],
   );
 
-  return <DefaultInput id={id} value={String(value)} onChange={handleChange} />;
+  const handleBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+
+      const newValue = value.replace(/\D/g, '');
+
+      onBlur(Number(newValue));
+    },
+    [onBlur],
+  );
+
+  return <DefaultInput onBlur={handleBlur} id={id} value={String(value)} onChange={handleChange} />;
 };
