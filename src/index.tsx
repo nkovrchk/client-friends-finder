@@ -8,9 +8,10 @@ import { Header } from 'components/Header';
 import { AuthProvider, NotificationProvider } from 'context';
 import { HttpInterceptor } from 'interceptors';
 import { Routes } from 'routes';
-import { ROUTES } from 'routes/consts';
 import { AppContainer, RootContainer } from 'styled';
 import { theme } from 'theme';
+
+import config from '../config.json';
 
 import 'normalize.css';
 
@@ -19,7 +20,7 @@ const App: React.FC = () => (
     <RootContainer>
       <AppContainer>
         <RecoilRoot>
-          <BrowserRouter basename={ROUTES.ROOT.PATH}>
+          <BrowserRouter basename={config.basename}>
             <NotificationProvider>
               <HttpInterceptor>
                 <AuthProvider>

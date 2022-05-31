@@ -15,7 +15,7 @@ export const TreeStyled = styled.div`
   }
 
   & .not-linked-path {
-    stroke: ${({ theme }) => theme.colors.cardStroke};
+    stroke: ${({ theme }) => theme.colors.textSecondary};
     stroke-width: 1px;
   }
 

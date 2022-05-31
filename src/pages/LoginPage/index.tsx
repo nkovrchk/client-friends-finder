@@ -5,6 +5,7 @@ import { useAuth } from 'context';
 import { ROUTES } from 'routes/consts';
 import { Text } from 'ui/Text';
 
+import config from '../../../config.json';
 import { LoginPageStyled, LoginFormStyled, VKButton } from './styled';
 
 const LoginPage: React.FC = () => {
@@ -12,7 +13,7 @@ const LoginPage: React.FC = () => {
 
   const { isAuthed } = useAuth();
   const redirect = useCallback(() => {
-    window.open('/auth/login', '_self', 'noopener, noreferrer');
+    window.open(`${config.apiUrl}api/v1/auth/login`, '_self', 'noopener, noreferrer');
   }, []);
 
   useEffect(() => {
