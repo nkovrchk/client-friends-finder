@@ -4,10 +4,8 @@
   "description": "Client application",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config webpack.base.js --mode development",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "start": "cross-env PROXY_URI=http://localhost:8081 webpack serve --config webpack.dev.js",
-    "docker": "webpack serve --config webpack.dev.js",
     "lint": "eslint 'src/**' --ext .js,.jsx,.ts,.tsx"
   },
   "author": "nkovrchk",
